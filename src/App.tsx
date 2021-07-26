@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
+import Counter from './counter/Counter';
 
 function App() {
-    let [inputCounter, setInputCounter] = useState(0)
+    let [inputCounter, setInputCounter] = useState<number>(0)
     let incButton = () => {
         if (inputCounter < 5) {
             setInputCounter(inputCounter + 1)
@@ -11,25 +12,14 @@ function App() {
         }
     }
     let resetButton = () => {
-        setInputCounter(inputCounter = 0)
+        setInputCounter(0)
     }
     return (
         <div className="App">
-            <div className='Counter'>
-                <div>
-                    <input className='InputCounter' value={inputCounter}/>
-                </div>
-                <div>
-                    <button className={inputCounter < 5 ? "IncButton" : "DisableButton"}
-                            onClick={incButton}
-                    >inc
-                    </button>
-                    <button className={inputCounter == 0 ? 'DisableButton' : "ResetButton"}
-                            onClick={resetButton}
-                    >reset
-                    </button>g
-                </div>
-            </div>
+            <Counter
+                inputCounter={inputCounter}
+                incButton={incButton}
+                resetButton={resetButton}/>
         </div>
     );
 }

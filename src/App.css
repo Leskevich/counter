@@ -45,3 +45,12 @@
     padding: 5px;
     color: chartreuse;
 }
+.AttentionInputCounter{
+    border: 3px solid aqua;
+    width: 175px;
+    padding: 30px;
+    text-align: center;
+    background-color: darkslategray;
+    color: red;
+    border-radius: 10px;
+}
