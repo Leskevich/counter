@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+     let [inputCounter, setInputCounter] = useState(0)
+
+    let incButton = () => {
+        if (inputCounter < 5) {
+            setInputCounter(inputCounter + 1)
+        }else {return}
+    }
+
+    let resetButton = () => {
+        setInputCounter(inputCounter = 0)
+
+    }
+
+
+    return (
+        <div className="App">
+            <div className='Counter'>
+                <div>
+                    <input className='InputCounter' value={inputCounter}/>
+                </div>
+                <div>
+                    <button className={inputCounter<5 ? "IncButton" : "DisableButton"}
+                            onClick={incButton}
+
+
+                    >inc</button>
+                    <button className={inputCounter==0 ? 'DisableButton' : "ResetButton"}
+                            onClick={resetButton}
+
+                    >reset</button>
+
+                </div>
+            </div>
+        </div>
+    );
 }
+
 
 export default App;
