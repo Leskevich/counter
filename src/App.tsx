@@ -1,47 +1,48 @@
 import React, {useState} from 'react';
 import './App.css';
-import Counter from './counter/Counter';
-import {stateType} from './state/state';
-import Tablo from './counter/tablo';
-import Inc from "./counter/inc";
-import ResetButton from "./counter/reset";
-
-type propsType = {
-    state: stateType
-}
+import Counter from "./Counter/counter";
+import StartCouter from "./Counter/startCouter";
 
 
-function App(props: propsType) {
-    let [inputCounter, setInputCounter] = useState<number>(0)
-    let incButton = () => {
-        if (inputCounter < 5) {
-            setInputCounter(inputCounter + 1)
-        } else {
-            return
-        }
+function App() {
+    let [count, setCount] = useState(0)
+    let [error, setError] = useState(false)
+    let [maxCout, setMaxCount]= useState(7)
+    let [startCount, setStartCount] = useState(0)
+
+
+    let inc = () => {
+        count < maxCout ?
+            setCount(count + 1) : setError(true)
     }
-    let resetButton = () => {
-        setInputCounter(0)
+    let reset = () => {
+        setCount(0)
+        setError(false)
     }
+    let resetMaxCount = (value:number) =>{
+        setMaxCount(value)
+    }
+    let resetStartCout= (value:number) => {
+        setStartCount(value)
+        setCount(value)
+
+    }
+
     return (
-        <div className="App">
+        <div className='blok'>
             <div>
-                <Counter
-                    inputCounter={inputCounter}
-                    incButton={incButton}
-                    resetButton={resetButton}/>
+                <StartCouter  resetMaxCount={resetMaxCount}
+                              maxCout={maxCout}
+                              resetStartCout={resetStartCout}
+                              startCount={startCount}
+                />
             </div>
             <div>
-                <Tablo state={props.state}/>
-                <div>
-                    <div><Inc/></div>
-                    <div><ResetButton/></div>
-                </div>
+                <Counter count={count} inc={inc} reset={reset} maxCout={maxCout} error={error}/>
+            </div>
 
-            </div>
         </div>
-
-    );
+    )
 
 
 }
