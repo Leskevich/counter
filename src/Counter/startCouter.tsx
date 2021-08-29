@@ -1,35 +1,52 @@
 import React, {ChangeEvent} from "react";
 
 
-type startCounterType={
-    resetMaxCount:(value:number)=>void
-    maxCout:number
-    resetStartCout: (value:number)=>void
-    startCount:number
+type startCounterType = {
+    max: (maxValue: number) => void
+    maxValue: number
+    startValue: number
+    startcouter: (value: number) => void
+    setCounterValue: () => void
+    disableCounter: () => void
+
 }
 
-let StartCouter = (props:startCounterType) => {
-    let onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+let StartCouter = (props: startCounterType) => {
+
+    let maxvalue = (e: ChangeEvent<HTMLInputElement>) => {
+        props.disableCounter()
         let value = e.currentTarget.value
-        props.resetMaxCount(Number(value))
+        props.max(Number(value))
+    }
+    let startvalue = (e: ChangeEvent<HTMLInputElement>) =>{
+        props.disableCounter()
+        let value = e.currentTarget.value
+        props.startcouter(+value)
     }
 
-    let onChangeStartValue=(e: ChangeEvent<HTMLInputElement>)=>{
-        let value = e.currentTarget.value
-        props.resetStartCout(Number(value))
-    }
+
     return (
 
         <div>
             <div>
-
-                <div>"max value"<input onChange={onChangeMaxValue} value={props.maxCout} /></div>
-                <div>"start value"<input onChange={onChangeStartValue} value={props.startCount} /></div>
-
-
+                <div>
+                    "max value"
+                    <input onChange={maxvalue}
+                           value={props.maxValue}
+                    />
+                </div>
+                <div>
+                   <span>
+                       "start value"
+                   </span>
+                    <input onChange={startvalue}
+                           value={props.startValue}/>
+                </div>
             </div>
             <div>
-                <button>set</button>
+                <button onClick={props.setCounterValue}>
+                    set
+                </button>
             </div>
         </div>
     )

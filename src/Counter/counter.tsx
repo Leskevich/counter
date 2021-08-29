@@ -5,11 +5,16 @@ type coutType = {
     count: number
     inc: () => void
     reset: () => void
-    maxCout: number
-    error:boolean
+    maxValue: number
+    startCounter: boolean
 }
 
 let Counter = (props: coutType) => {
+    const {
+        count,
+        maxValue,
+        startCounter
+    } = props
 
     let inc = () => {
         props.inc()
@@ -18,17 +23,26 @@ let Counter = (props: coutType) => {
         props.reset()
     }
 
+    const isMaxCount = count >= maxValue;
+    const isDisabledInc = isMaxCount || startCounter
+    const isDisabledResetBtn = props.count === 0 || startCounter
+
     return (
         <div className={s.counter}>
-            <div>
-                <input className={props.count===props.maxCout? s.errorInput:s.valueInput} value={props.count}/>
+            <div className={props.count === props.maxValue ? s.errorInput : s.valueInput}>
+                {props.count}
             </div>
             <div>
                 <div className={s.buttons}>
-                    <button disabled={props.error}
-                            onClick={inc}>inc</button>
-                    <button disabled={props.count===0}
-                            onClick={reset}>Reset</button>
+                    <button disabled={isDisabledInc}
+                            onClick={inc}>
+                        inc
+                    </button>
+                    <button disabled={isDisabledResetBtn}
+                            onClick={reset}
+                    >
+                        Reset
+                    </button>
                 </div>
             </  div>
         </div>
