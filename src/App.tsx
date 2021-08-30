@@ -9,7 +9,6 @@ function App() {
     let [count, setCount] = useState(0)
     let [maxValue, setMaxValue] = useState(4)
     let [startValue, setStartValue] = useState(0)
-
     let [startCounter, setStartCounter] = useState(true)
 
     const setCounterValue = () => {
@@ -23,7 +22,6 @@ function App() {
     let reset = () => {
         setCount(startValue)
     }
-
     let max = (maxValue: number) => {
         setMaxValue(maxValue)
     }

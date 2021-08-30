@@ -1,5 +1,6 @@
 import React from "react";
 import s from './counter.module.css'
+import ButtonCounter from "./buttonCounter";
 
 type coutType = {
     count: number
@@ -34,15 +35,14 @@ let Counter = (props: coutType) => {
             </div>
             <div>
                 <div className={s.buttons}>
-                    <button disabled={isDisabledInc}
-                            onClick={inc}>
-                        inc
-                    </button>
-                    <button disabled={isDisabledResetBtn}
+                    <ButtonCounter value={"inc"}
+                            onClick={inc}
+                            disabled={isDisabledInc}
+                    />
+                    <ButtonCounter value={"reset"}
                             onClick={reset}
-                    >
-                        Reset
-                    </button>
+                            disabled={isDisabledResetBtn}
+                    />
                 </div>
             </  div>
         </div>

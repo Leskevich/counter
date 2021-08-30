@@ -18,7 +18,7 @@ let StartCouter = (props: startCounterType) => {
         let value = e.currentTarget.value
         props.max(Number(value))
     }
-    let startvalue = (e: ChangeEvent<HTMLInputElement>) =>{
+    let startvalue = (e: ChangeEvent<HTMLInputElement>) => {
         props.disableCounter()
         let value = e.currentTarget.value
         props.startcouter(+value)
