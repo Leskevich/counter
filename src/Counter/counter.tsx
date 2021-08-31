@@ -7,26 +7,27 @@ type coutType = {
     inc: () => void
     reset: () => void
     maxValue: number
-    startCounter: boolean
+    disableB: boolean
+    setLocal:()=>void
 }
 
 let Counter = (props: coutType) => {
     const {
         count,
         maxValue,
-        startCounter
+        disableB
     } = props
 
     let inc = () => {
         props.inc()
+        props.setLocal()
     }
     let reset = () => {
         props.reset()
     }
 
-    const isMaxCount = count >= maxValue;
-    const isDisabledInc = isMaxCount || startCounter
-    const isDisabledResetBtn = props.count === 0 || startCounter
+    const isDisabledInc = count >= maxValue || disableB
+    const isDisabledResetBtn = props.count === 0 || disableB
 
     return (
         <div className={s.counter}>

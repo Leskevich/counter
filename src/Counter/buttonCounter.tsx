@@ -1,4 +1,5 @@
 import React from "react";
+import s from './counter.module.css'
 
 
 type buttonCounterT = {
@@ -12,6 +13,7 @@ const ButtonCounter = (props: buttonCounterT) => {
         <div>
             <button onClick={props.onClick}
                     disabled={props.disabled}
+                    className={s.buttons}
             >
                 {props.value}
             </button>

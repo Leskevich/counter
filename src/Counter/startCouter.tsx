@@ -1,4 +1,6 @@
 import React, {ChangeEvent} from "react";
+import ButtonCounter from "./buttonCounter";
+import s from './counter.module.css'
 
 
 type startCounterType = {
@@ -6,8 +8,9 @@ type startCounterType = {
     maxValue: number
     startValue: number
     startcouter: (value: number) => void
-    setCounterValue: () => void
+    setDisableButton: () => void
     disableCounter: () => void
+    disableB:boolean
 
 }
 
@@ -24,29 +27,38 @@ let StartCouter = (props: startCounterType) => {
         props.startcouter(+value)
     }
 
+    const disabled = !props.disableB || props.startValue<0
 
     return (
 
-        <div>
-            <div>
-                <div>
-                    "max value"
+        <div className={s.startCounter}>
+            <div >
+                <div className={s.inputStartCounter}>
+                    <span>
+                        max value
+                    </span>
                     <input onChange={maxvalue}
                            value={props.maxValue}
+                           className={s.valueInput}
+                           type='number'
                     />
                 </div>
-                <div>
+                <div className={s.inputStartCounter}>
                    <span>
-                       "start value"
+                       start value
                    </span>
                     <input onChange={startvalue}
-                           value={props.startValue}/>
+                           value={props.startValue}
+                           className={s.valueInput}
+                    />
                 </div>
             </div>
-            <div>
-                <button onClick={props.setCounterValue}>
-                    set
-                </button>
+            <div className={s.buttonStartCounter}>
+                <ButtonCounter
+                value={'set'}
+                onClick={props.setDisableButton}
+                disabled={disabled}
+                />
             </div>
         </div>
     )
