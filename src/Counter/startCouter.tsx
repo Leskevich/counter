@@ -10,8 +10,9 @@ type startCounterType = {
     startcouter: (value: number) => void
     setDisableButton: () => void
     disableCounter: () => void
-    disableB:boolean
-
+    disableB: boolean
+    count: number
+    setLocal: (value:number) => void
 }
 
 let StartCouter = (props: startCounterType) => {
@@ -25,17 +26,18 @@ let StartCouter = (props: startCounterType) => {
         props.disableCounter()
         let value = e.currentTarget.value
         props.startcouter(+value)
+        props.setLocal(+value)
     }
 
-    const disabled = !props.disableB || props.startValue<0
+    const disabled = !props.disableB || props.startValue < 0
 
     return (
 
         <div className={s.startCounter}>
-            <div >
+            <div>
                 <div className={s.inputStartCounter}>
                     <span>
-                        max value
+                        max value:
                     </span>
                     <input onChange={maxvalue}
                            value={props.maxValue}
@@ -44,20 +46,18 @@ let StartCouter = (props: startCounterType) => {
                     />
                 </div>
                 <div className={s.inputStartCounter}>
-                   <span>
-                       start value
-                   </span>
-                    <input onChange={startvalue}
-                           value={props.startValue}
-                           className={s.valueInput}
-                    />
+                    start value:<input onChange={startvalue}
+                                       value={props.startValue}
+                                       className={s.valueInput}
+                                       type='number'
+                />
                 </div>
             </div>
             <div className={s.buttonStartCounter}>
                 <ButtonCounter
-                value={'set'}
-                onClick={props.setDisableButton}
-                disabled={disabled}
+                    value={'set'}
+                    onClick={props.setDisableButton}
+                    disabled={disabled}
                 />
             </div>
         </div>

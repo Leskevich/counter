@@ -8,7 +8,8 @@ type coutType = {
     reset: () => void
     maxValue: number
     disableB: boolean
-    setLocal:()=>void
+    setLocal: (value:number) => void
+    startValue: number
 }
 
 let Counter = (props: coutType) => {
@@ -20,29 +21,37 @@ let Counter = (props: coutType) => {
 
     let inc = () => {
         props.inc()
-        props.setLocal()
+
     }
     let reset = () => {
         props.reset()
     }
 
     const isDisabledInc = count >= maxValue || disableB
-    const isDisabledResetBtn = props.count === 0 || disableB
+    const isDisabledResetBtn = props.count === props.startValue || disableB
+    const counterInspect = () => {
+        if (props.startValue < 0) {
+            return 'больше 0 ск'
+        } else {
+
+        }
+    }
 
     return (
         <div className={s.counter}>
             <div className={props.count === props.maxValue ? s.errorInput : s.valueInput}>
-                {props.count}
+
+                {props.startValue < 0 ? 'больше 0 сук' : props.count}
             </div>
             <div>
                 <div className={s.buttons}>
                     <ButtonCounter value={"inc"}
-                            onClick={inc}
-                            disabled={isDisabledInc}
+                                   onClick={inc}
+                                   disabled={isDisabledInc}
                     />
                     <ButtonCounter value={"reset"}
-                            onClick={reset}
-                            disabled={isDisabledResetBtn}
+                                   onClick={reset}
+                                   disabled={isDisabledResetBtn}
                     />
                 </div>
             </  div>

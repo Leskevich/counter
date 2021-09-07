@@ -7,18 +7,22 @@ import StartCouter from './Counter/startCouter';
 function App() {
 
 
+    const valueFromLocalStorage = Number(localStorage.getItem('count')) ;
 
-    let [count, setCount] = useState(0)
+    let [count, setCount] = useState(valueFromLocalStorage)
     let [maxValue, setMaxValue] = useState(0)
     let [startValue, setStartValue] = useState(0)
     let [disableB, setDisableB] = useState(true)
 
-    const setLocal = () => {
-       localStorage.setItem('count',JSON.stringify(count) )
+
+
+    const setLocal = (value:number) => {
+       localStorage.setItem('count',JSON.stringify(value) )
     }
 
     const setDisableButton = () => {
         setDisableB(false)
+        if(startValue>=0){setCount(startValue)}
     }
     const disableCounter = () => setDisableB(true)
 
@@ -33,7 +37,7 @@ function App() {
     }
     let startcouter = (value: number) => {
         setStartValue(value)
-        setCount(value)
+
     }
 
     return (
@@ -46,6 +50,8 @@ function App() {
                              setDisableButton={setDisableButton}
                              disableCounter={disableCounter}
                              disableB={disableB}
+                             count={count}
+                             setLocal={setLocal}
                 />
             </div>
             <div>
@@ -55,6 +61,7 @@ function App() {
                          maxValue={maxValue}
                          disableB={disableB}
                          setLocal={setLocal}
+                         startValue={startValue}
 
                 />
             </div>
